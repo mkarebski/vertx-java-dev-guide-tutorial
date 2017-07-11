@@ -5,6 +5,8 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
+import pl.mkarebski.vertx.database.WikiDatabaseVerticle;
+import pl.mkarebski.vertx.http.WikiHttpServerVerticle;
 
 public class MainVerticle extends AbstractVerticle {
 
@@ -15,13 +17,13 @@ public class MainVerticle extends AbstractVerticle {
 
     /*Future<String> dbVerticleDeployment = Future.future();
     vertx.deploy(
-      new WikiDatabaseVerticle(),
+      new WikiDatabaseServiceImpl(),
       dbVerticleDeployment.completer());
 */
 
     /*Future<String> httpVerticleDeployment = Future.future();
     vertx.deploy(
-      "pl.mkarebski.vertx.WikiHttpServerVerticle",
+      "pl.mkarebski.vertx.http.WikiHttpServerVerticle",
       new DeploymentOptions().setInstances(2),
       httpVerticleDeployment.completer());
 */
@@ -29,8 +31,8 @@ public class MainVerticle extends AbstractVerticle {
     String httpVerticle = WikiHttpServerVerticle.class.getCanonicalName();
 
     deploy(dbVerticle, 1)
-        .compose(event -> deploy(httpVerticle, 2))
-        .setHandler(verticleId -> startFuture.completer());
+      .compose(event -> deploy(httpVerticle, 2))
+      .setHandler(verticleId -> startFuture.completer());
 
   }
 
