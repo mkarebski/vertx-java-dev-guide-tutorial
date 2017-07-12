@@ -38,12 +38,12 @@ class WikiDatabaseServiceImpl implements WikiDatabaseService {
     this.dbClient = dbClient;
     this.sqlQueries = sqlQueries;
 
-    dbClient.getConnection(ar -> {
-      if (ar.failed()) {
-        LOGGER.error("Could not open a database connection", ar.cause());
-        readyHandler.handle(Future.failedFuture(ar.cause()));
+    dbClient.getConnection(asyncResult -> {
+      if (asyncResult.failed()) {
+        LOGGER.error("Could not open a database connection", asyncResult.cause());
+        readyHandler.handle(Future.failedFuture(asyncResult.cause()));
       } else {
-        SQLConnection connection = ar.result();
+        SQLConnection connection = asyncResult.result();
         connection.execute(sqlQueries.get(SqlQuery.CREATE_PAGES_TABLE), create -> {
           connection.close();
           if (create.failed()) {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Annotation profile for vertx-start-project" enabled="true">
+        <sourceOutputDir name="src/main/generated" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="outputDirectory" value="$PROJECT_DIR$/src/main" />
+        <processor name="io.vertx.codegen.CodeGenProcessor" />
+        <module name="vertx-start-project" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="vertx-start-project" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
